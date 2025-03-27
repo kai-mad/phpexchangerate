@@ -27,7 +27,7 @@ class ExchangeRateController extends CommandController {
         $sourceCurrencyCode = $this->getParam("source");
         if (!isset($sourceCurrencyCode)) {
             $this->getApp()->getOutputHandler()->print("Missing required parameter 'source'");
-            $this->getApp()->getOutputHandler()->print($this->documentationString);
+            $this->getApp()->getOutputHandler()->print(ExchangeRateController::$documentationString);
             exit;
         }
 

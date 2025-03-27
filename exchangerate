@@ -1,8 +1,9 @@
-#!/opt/homebrew/bin/php
+#!/usr/local/bin/php
 <?php declare(strict_types=1);
 
-// swap line 1 with this for the docker setup.
-// #!/usr/bin/php
+// swap line 1 with these depending on environment/docker.
+// #/usr/local/bin/php
+// #!/opt/homebrew/bin/php
 
 // Check interface type, exit if not CLI.
 if (php_sapi_name() !== 'cli') {
