@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Service;
 
@@ -35,7 +35,7 @@ class ExchangeRateDotHostApi {
                 throw new ErrorException($errorMessage);
             }
             
-            $responseBody = json_decode($response->getBody(), true);
+            $responseBody = json_decode($response->getBody()->getContents(), true);
             if (!$responseBody['success'] === true) {
                 throw new ErrorException($responseBody['error']['info']);
             }
