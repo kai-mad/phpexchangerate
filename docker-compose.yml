@@ -1,0 +1,16 @@
+version: '1.0'
+
+services:
+
+    cli:
+        profiles:
+            - donotstart
+        build:
+            context: .
+            target: php-cli
+        working_dir: /var/www/html/
+        volumes:
+            - .:/var/www/html/
+            - ~/.ssh/:/root/.ssh/
+volumes:
+    db_data: {}
