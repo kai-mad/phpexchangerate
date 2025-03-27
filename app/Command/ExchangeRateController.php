@@ -2,6 +2,7 @@
 
 namespace App\Command;
 
+use CliExchangeRate\App;
 use App\Model\ExchangeRate;
 use CliExchangeRate\CommandController;
 use App\Service\ExchangeRateDotHostApi;
@@ -14,10 +15,10 @@ class ExchangeRateController extends CommandController {
     public static string $documentationString = 
         "usage: ./exchangerate get source-currency=[ source currency code ]";
 
-    Public function __construct(\CliExchangeRate\App $app) {
+    Public function __construct(App $app) {
         parent::__construct($app);
 
-        $this->api = new ExchangeRateDotHostApi($app);
+        $this->api = new ExchangeRateDotHostApi();
     }
 
     public function run($argv) {
@@ -34,7 +35,12 @@ class ExchangeRateController extends CommandController {
         // Get 
         $exchangeRate = $this->api->getRecentExchangeRatesForCurrency($sourceCurrencyCode);
         if (!$exchangeRate instanceof ExchangeRate) {
-            $this->getApp()->getOutputHandler()->print("ERROR: response could not be formed into ExchangeRate object");
+            if ($exchangeRate instanceof string) {
+                $this->getApp()->getOutputHandler()->print($exchangeRate);
+            } else {
+                $this->getApp()->getOutputHandler()->print("ERROR: response could not be formed into ExchangeRate object");
+            }
+            exit;
         }
         
         $this->getApp()->getOutputHandler()->out($exchangeRate->getExchangeRateOutputString());

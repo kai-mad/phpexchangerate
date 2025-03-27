@@ -9,12 +9,10 @@ use GuzzleHttp\Psr7\Request;
 
 class ExchangeRateDotHostApi {
 
-    protected $app;
     public Client $client;
     private string $apiKey;
 
-    Public function __construct($app) {
-        $this->app = $app;
+    Public function __construct() {
 
         $this->client = new Client([
             'base_uri' => 'https://api.exchangerate.host',
@@ -47,8 +45,7 @@ class ExchangeRateDotHostApi {
             );
 
         } catch (\Exception $e) {
-            $this->app->getOutputHandler()->print("ERROR: " . $e->getMessage());
-            exit;
+            return $e->getMessage();
         }
     }
 
