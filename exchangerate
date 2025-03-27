@@ -1,0 +1,28 @@
+#!/opt/homebrew/bin/php
+#!/usr/bin/php
+<?php
+
+// Check interface type, exit if not CLI.
+if (php_sapi_name() !== 'cli') {
+    exit;
+}
+
+require __DIR__ . '/vendor/autoload.php';
+
+// Look for .env at the root directory
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
+use CliExchangeRate\App;
+
+$app = new App();
+
+$app->registerController('get', new \App\Command\ExchangeRateController($app));
+
+$app->registerCommand('help', function (array $argv) use ($app) {
+    $app->getOutputHandler()->print(
+        "Commands: get: " . \App\Command\ExchangeRateController::$documentationString
+    );
+});
+
+$app->runCommand($argv);
