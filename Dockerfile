@@ -10,7 +10,12 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Add Composer to the PATH
 ENV PATH="$PATH:/usr/local/bin"
 
+RUN set -x \
+ && mkdir -p /var/www/html
+
 WORKDIR /var/www/html
+
+COPY composer.* ./
 
 RUN set -x \
  && composer install --no-interaction
