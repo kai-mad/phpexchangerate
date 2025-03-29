@@ -15,7 +15,7 @@ final class ExchangerateDotHostApiTest extends TestCase {
 
 	public function testApiResponseCanCreateExchangeRateObject() {
 		$api = new ExchangeRateDotHostApi();
-		$expectedExchangeRateObject = $api->getRecentExchangeRatesForCurrency("USD");
+		$expectedExchangeRateObject = $api->getRecentExchangeRatesForCurrency("USD", null, true);
 		self::assertInstanceOf("App\Model\ExchangeRate", $expectedExchangeRateObject);
 	}
 
