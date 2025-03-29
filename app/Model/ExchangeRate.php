@@ -4,21 +4,17 @@ namespace App\Model;
 readonly class ExchangeRate {
 
     public function __construct(
-        public array $quotes,
+        public ExchangeRateQuotesCollection $quotes,
         public string $source,
         public int $timeStamp,
     ) {}
 
     public function getExchangeRateOutputString() {
-      $quotesCopy = $this->quotes;
-      $outputString = "";
-      array_walk(
-          $quotesCopy, 
-          function ($item, $key) use (&$outputString) {
-              $outputString .= $key ." = " . $item . "\n";  
-          }
-      );
-      return $outputString;
+        $outputString = "";
+        foreach($this->quotes->getArrayCopy() as $quote) {
+            $outputString .= "{$quote->exchangeRateHumanReadableString}\n";
+        };
+        return $outputString;
     }
 
 }
