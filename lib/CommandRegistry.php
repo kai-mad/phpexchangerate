@@ -8,7 +8,7 @@ class CommandRegistry {
     protected $commandControllers = [];
 
     public function registerController($commandName, CommandController $commandController) {
-        $this->commandControllers = [ $commandName => $commandController ];
+        $this->commandControllers[$commandName] = $commandController;
     }
 
     public function registerCommand($name, $callable) {

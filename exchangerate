@@ -20,11 +20,16 @@ use CliExchangeRate\App;
 
 $app = new App();
 
-$app->registerController('get', new \App\Command\ExchangeRateController($app));
+$app->registerController('list', new \App\Command\ExchangeRateListController($app));
+$app->registerController('convert', new \App\Command\ExchangeRateConvertController($app));
 
 $app->registerCommand('help', function (array $argv) use ($app) {
-    $app->getOutputHandler()->print(
-        "Commands: get: " . \App\Command\ExchangeRateController::$documentationString
+    $app->getOutputHandler()->out(
+        message: 
+            "\n" .
+            "Commands: \n\n" .
+            "   list:    " . \App\Command\ExchangeRateListController::$documentationString . "\n\n" .
+            "   convert: " . \App\Command\ExchangeRateConvertController::$documentationString . "\n\n"
     );
 });
 

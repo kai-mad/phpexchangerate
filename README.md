@@ -4,8 +4,11 @@ How to use (assuming you are in repo directory):
 
 1. $`cp .env.example .env` and insert your exchangerate.host API-key into the .env file
 
-2. $`docker compose up cli`
+2. $`docker compose up cli` to get everything up and running.
 
-3. After the service is up and running, fetch exchangerates with $`docker compose run cli /var/www/html/exchangerate get source=NOK`
+ 
+- Fetch a list of exchangerates with $`docker compose run --rm cli /var/www/html/exchangerate list source=NOK`
 
-4. To run tests, use $`docker compose run cli ./vendor/bin/phpunit tests`
+- Convert a value from one currency to another with $`docker compose run --rm cli /var/www/html/exchangerate convert value=100 source=SEK target=EUR`
+
+- To run tests, use $`docker compose run --rm cli ./vendor/bin/phpunit tests`
